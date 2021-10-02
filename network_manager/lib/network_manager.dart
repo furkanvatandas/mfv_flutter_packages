@@ -11,7 +11,7 @@ import 'package:network_manager/models/base_response.dart';
 import 'package:network_manager/network_result.dart';
 
 class NetworkManager {
-  final Logger _log = Logger('ApiClient');
+  final Logger _log = Logger('NetworkManager');
 
   NetworkManager._privateConstructor();
   static final NetworkManager instance = NetworkManager._privateConstructor();
