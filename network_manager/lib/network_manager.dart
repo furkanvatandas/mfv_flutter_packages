@@ -20,7 +20,6 @@ class NetworkManager {
     required HttpRequestProtocol req,
     required S successModel,
     required E errorModel,
-    required,
   }) async {
     var _header = req.headers..removeWhere((key, value) => value.isEmpty);
     var _body = req.bodyParameters..removeWhere((key, value) => value.isEmpty);
