@@ -50,16 +50,41 @@ class NetworkManager {
           return const NetworkResult.exception('Http request exception');
       }
     } on SocketException catch (e) {
-      _log.shout('SocketException: ${e.message} - ${req.runtimeType}()');
+      _log.shout(
+        'SocketException: ${e.message}\n'
+        'Port: ${e.port}\n'
+        'OSError: ${e.osError}\n'
+        'Address: ${e.address}\n'
+        'Request: ${req.runtimeType}()',
+      );
       return const NetworkResult.exception('İnternet bağlantınızı kontrol edebilir misiniz?');
     } on TimeoutException catch (e) {
-      _log.shout('TimeoutException: ${e.message} - ${req.runtimeType}()');
+      _log.shout(
+        'TimeoutException: ${e.message}\n'
+        'Duration: ${e.duration}\n'
+        'Request: ${req.runtimeType}()',
+      );
       return const NetworkResult.exception('İstek zaman aşımına uğradı işleminizi lütfen tekrar deneyiniz.');
     } on HttpException catch (e) {
-      _log.shout('HttpException ${e.message} - ${req.runtimeType}()');
+      _log.shout(
+        'HttpException ${e.message}\n'
+        'Uri ${e.uri}\n'
+        'Request: ${req.runtimeType}()',
+      );
+      return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
+    } on FormatException catch (e) {
+      _log.shout(
+        'FormatException ${e.message}\n'
+        'Source ${e.source}\n'
+        'Offset ${e.offset}\n'
+        'Request: ${req.runtimeType}()',
+      );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } catch (e) {
-      _log.shout('$e - ${req.runtimeType}()');
+      _log.shout(
+        '$e\n'
+        'Request: ${req.runtimeType}()',
+      );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     }
   }
