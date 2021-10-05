@@ -67,16 +67,16 @@ class NetworkManager {
       return const NetworkResult.exception('İstek zaman aşımına uğradı işleminizi lütfen tekrar deneyiniz.');
     } on HttpException catch (e) {
       _log.shout(
-        'HttpException ${e.message}\n'
-        'Uri ${e.uri}\n'
+        'HttpException: ${e.message}\n'
+        'Uri: ${e.uri}\n'
         'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } on FormatException catch (e) {
       _log.shout(
-        'FormatException ${e.message}\n'
-        'Source ${e.source}\n'
-        'Offset ${e.offset}\n'
+        'FormatException: ${e.message}\n'
+        'Source: ${e.source}\n'
+        'Offset: ${e.offset}\n'
         'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
