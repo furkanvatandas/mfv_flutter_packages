@@ -16,9 +16,9 @@ class NetworkManager {
   NetworkManager._privateConstructor();
   static final NetworkManager instance = NetworkManager._privateConstructor();
 
-  Future<NetworkResult<S, E, String>> request<S extends BaseResponse, E extends BaseResponse>({
+  Future<NetworkResult<P, E, String>> request<P extends BaseResponse, E extends BaseResponse>({
     required HttpRequestProtocol req,
-    required S successModel,
+    required P parseModel,
     required E errorModel,
   }) async {
     var _header = req.headers..removeWhere((key, value) => value.isEmpty);
@@ -32,19 +32,19 @@ class NetworkManager {
       switch (req.httpMethod) {
         case HttpMethods.get:
           http.Response response = await http.get(uri, headers: _header);
-          return _response(response, successModel, errorModel);
+          return _response(response, parseModel, errorModel);
 
         case HttpMethods.post:
           final response = await http.post(uri, headers: _header, body: jsonEncode(_body));
-          return _response(response, successModel, errorModel);
+          return _response(response, parseModel, errorModel);
 
         case HttpMethods.put:
           final response = await http.put(uri, body: jsonEncode(_body), headers: _header);
-          return _response(response, successModel, errorModel);
+          return _response(response, parseModel, errorModel);
 
         case HttpMethods.delete:
           final response = await http.delete(uri, headers: _header);
-          return _response(response, successModel, errorModel);
+          return _response(response, parseModel, errorModel);
 
         default:
           return const NetworkResult.exception('Http request exception');
@@ -97,15 +97,21 @@ class NetworkManager {
     }
   }
 
-  NetworkResult<S, E, String> _response<S extends BaseResponse, E extends BaseResponse>(
+  NetworkResult<P, E, String> _response<P extends BaseResponse, E extends BaseResponse>(
     http.Response response,
-    S successModel,
+    P parseModel,
     E errorModel,
   ) {
     var responseJson = json.decode(response.body);
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
-      return NetworkResult.success(successModel.fromJson(responseJson));
+      if (response.body is List) {
+        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList() as P);
+      } else if (response.body is Map) {
+        return NetworkResult.success(parseModel.fromJson(responseJson));
+      } else {
+        return NetworkResult.success(responseJson);
+      }
     } else {
       _log.warning('Response: $responseJson');
       return NetworkResult.failure(errorModel.fromJson(responseJson));
