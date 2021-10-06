@@ -16,10 +16,10 @@ class NetworkManager {
   NetworkManager._privateConstructor();
   static final NetworkManager instance = NetworkManager._privateConstructor();
 
-  Future<NetworkResult<R, E, String>> request<R, P extends BaseResponse, E extends BaseResponse>({
+  Future<NetworkResult<Success, Failure, String>> request<Success, Parser extends BaseResponse, Failure extends BaseResponse>({
     required HttpRequestProtocol req,
-    required P parseModel,
-    required E errorModel,
+    required Parser parseModel,
+    required Failure failureModel,
   }) async {
     var _header = req.headers..removeWhere((key, value) => value.isEmpty);
     var _body = req.bodyParameters..removeWhere((key, value) => value.isEmpty);
@@ -32,19 +32,19 @@ class NetworkManager {
       switch (req.httpMethod) {
         case HttpMethods.get:
           http.Response response = await http.get(uri, headers: _header);
-          return _response(response, parseModel, errorModel);
+          return _response(response: response, parseModel: parseModel, errorModel: failureModel);
 
         case HttpMethods.post:
           final response = await http.post(uri, headers: _header, body: jsonEncode(_body));
-          return _response(response, parseModel, errorModel);
+          return _response(response: response, parseModel: parseModel, errorModel: failureModel);
 
         case HttpMethods.put:
           final response = await http.put(uri, body: jsonEncode(_body), headers: _header);
-          return _response(response, parseModel, errorModel);
+          return _response(response: response, parseModel: parseModel, errorModel: failureModel);
 
         case HttpMethods.delete:
           final response = await http.delete(uri, headers: _header);
-          return _response(response, parseModel, errorModel);
+          return _response(response: response, parseModel: parseModel, errorModel: failureModel);
 
         default:
           return const NetworkResult.exception('Http request exception');
@@ -97,20 +97,20 @@ class NetworkManager {
     }
   }
 
-  NetworkResult<R, E, String> _response<R, P extends BaseResponse, E extends BaseResponse>(
-    http.Response response,
-    P parseModel,
-    E errorModel,
-  ) {
+  NetworkResult<Success, Failure, String> _response<Success, Parser extends BaseResponse, Failure>({
+    required http.Response response,
+    required Parser parseModel,
+    required BaseResponse errorModel,
+  }) {
     var responseJson = json.decode(response.body);
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
-      if (response.body is List<P>) {
-        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e) as P).toList() as R);
+      if (responseJson is List) {
+        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList().cast<Parser>() as Success);
       } else if (response.body is Map) {
-        return NetworkResult.success(parseModel.fromJson(responseJson));
+        return NetworkResult.success(parseModel.fromJson(responseJson) as Success);
       } else {
-        return NetworkResult.success(responseJson);
+        return NetworkResult.success(responseJson as Success);
       }
     } else {
       _log.warning('Response: $responseJson');
