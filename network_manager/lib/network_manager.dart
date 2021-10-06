@@ -11,31 +11,31 @@ import 'package:network_manager/models/base_response.dart';
 import 'package:network_manager/network_result.dart';
 
 class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> {
-  final Parser _parseModel;
-  final Failure _failureModel;
-  final HttpRequestProtocol _req;
+  final Parser parseModel;
+  final Failure failureModel;
+  final HttpRequestProtocol req;
 
   final Logger _log = Logger('NetworkManager');
 
-  NetworkManager(
-    this._req,
-    this._parseModel,
-    this._failureModel,
-  );
+  NetworkManager({
+    required this.req,
+    required this.parseModel,
+    required this.failureModel,
+  });
 
   //NetworkManager._privateConstructor();
   //static final NetworkManager instance = NetworkManager._privateConstructor();
 
   Future<NetworkResult<Success, Failure, String>> request<Success>() async {
-    var _header = _req.headers..removeWhere((key, value) => value.isEmpty);
-    var _body = _req.bodyParameters..removeWhere((key, value) => value.isEmpty);
-    var _query = _req.queryParameters..removeWhere((key, value) => value.isEmpty);
+    var _header = req.headers..removeWhere((key, value) => value.isEmpty);
+    var _body = req.bodyParameters..removeWhere((key, value) => value.isEmpty);
+    var _query = req.queryParameters..removeWhere((key, value) => value.isEmpty);
 
-    Uri _uri = _req.isHttps ? Uri.https(_req.baseUrl, _req.path, _query) : Uri.http(_req.baseUrl, _req.path, _query);
-    _log.info('${_req.httpMethod} $_uri Headers: $_header');
+    Uri _uri = req.isHttps ? Uri.https(req.baseUrl, req.path, _query) : Uri.http(req.baseUrl, req.path, _query);
+    _log.info('${req.httpMethod} $_uri Headers: $_header');
 
     try {
-      switch (_req.httpMethod) {
+      switch (req.httpMethod) {
         case HttpMethods.get:
           http.Response response = await http.get(_uri, headers: _header);
           return _response(response);
@@ -58,21 +58,21 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
         'Port: ${e.port}\n'
         'OSError: ${e.osError}\n'
         'Address: ${e.address}\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İnternet bağlantınızı kontrol edebilir misiniz?');
     } on TimeoutException catch (e) {
       _log.shout(
         'TimeoutException: ${e.message}\n'
         'Duration: ${e.duration}\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İstek zaman aşımına uğradı işleminizi lütfen tekrar deneyiniz.');
     } on HttpException catch (e) {
       _log.shout(
         'HttpException: ${e.message}\n'
         'Uri: ${e.uri}\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } on FormatException catch (e) {
@@ -80,7 +80,7 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
         'FormatException: ${e.message}\n'
         'Source: ${e.source}\n'
         'Offset: ${e.offset}\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } on HandshakeException catch (e) {
@@ -88,13 +88,13 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
         'HandshakeException: ${e.message}\n'
         'OSError: ${e.osError}\n'
         'Type: ${e.type}\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } catch (e) {
       _log.shout(
         '$e\n'
-        'Request: ${_req.runtimeType}()',
+        'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     }
@@ -105,15 +105,15 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
       if (responseJson is List) {
-        return NetworkResult.success(responseJson.map((e) => _parseModel.fromJson(e)).toList().cast<Parser>() as Success);
+        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList().cast<Parser>() as Success);
       } else if (responseJson is Map<String, dynamic>) {
-        return NetworkResult.success(_parseModel.fromJson(responseJson) as Success);
+        return NetworkResult.success(parseModel.fromJson(responseJson) as Success);
       } else {
         return NetworkResult.success(responseJson as Success);
       }
     } else {
       _log.warning('Response: $responseJson');
-      return NetworkResult.failure(_failureModel.fromJson(responseJson));
+      return NetworkResult.failure(failureModel.fromJson(responseJson));
     }
   }
 }
