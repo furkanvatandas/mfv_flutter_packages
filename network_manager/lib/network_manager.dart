@@ -105,8 +105,8 @@ class NetworkManager {
     var responseJson = json.decode(response.body);
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
-      if (response.body is List) {
-        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList() as R);
+      if (response.body is List<P>) {
+        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e) as P).toList() as R);
       } else if (response.body is Map) {
         return NetworkResult.success(parseModel.fromJson(responseJson));
       } else {
