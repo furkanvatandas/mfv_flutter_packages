@@ -11,20 +11,17 @@ import 'package:network_manager/models/base_response.dart';
 import 'package:network_manager/network_result.dart';
 
 class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> {
+  final Logger _log = Logger('NetworkManager');
+
   final Parser parseModel;
   final Failure failureModel;
   final HttpRequestProtocol req;
-
-  final Logger _log = Logger('NetworkManager');
 
   NetworkManager({
     required this.req,
     required this.parseModel,
     required this.failureModel,
   });
-
-  //NetworkManager._privateConstructor();
-  //static final NetworkManager instance = NetworkManager._privateConstructor();
 
   Future<NetworkResult<Success, Failure, String>> request<Success>() async {
     var _header = req.headers..removeWhere((key, value) => value.isEmpty);
@@ -54,41 +51,41 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
       }
     } on SocketException catch (e) {
       _log.shout(
+        '${req.runtimeType}()\n'
         'SocketException: ${e.message}\n'
         'Port: ${e.port}\n'
         'OSError: ${e.osError}\n'
-        'Address: ${e.address}\n'
-        'Request: ${req.runtimeType}()',
+        'Address: ${e.address}',
       );
       return const NetworkResult.exception('İnternet bağlantınızı kontrol edebilir misiniz?');
     } on TimeoutException catch (e) {
       _log.shout(
+        '${req.runtimeType}()\n'
         'TimeoutException: ${e.message}\n'
-        'Duration: ${e.duration}\n'
-        'Request: ${req.runtimeType}()',
+        'Duration: ${e.duration}',
       );
       return const NetworkResult.exception('İstek zaman aşımına uğradı işleminizi lütfen tekrar deneyiniz.');
     } on HttpException catch (e) {
       _log.shout(
+        '${req.runtimeType}()\n'
         'HttpException: ${e.message}\n'
-        'Uri: ${e.uri}\n'
-        'Request: ${req.runtimeType}()',
+        'Uri: ${e.uri}',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } on FormatException catch (e) {
       _log.shout(
+        '${req.runtimeType}()\n'
         'FormatException: ${e.message}\n'
         'Source: ${e.source}\n'
-        'Offset: ${e.offset}\n'
-        'Request: ${req.runtimeType}()',
+        'Offset: ${e.offset}',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } on HandshakeException catch (e) {
       _log.shout(
+        '${req.runtimeType}()\n'
         'HandshakeException: ${e.message}\n'
         'OSError: ${e.osError}\n'
-        'Type: ${e.type}\n'
-        'Request: ${req.runtimeType}()',
+        'Type: ${e.type}',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } catch (e) {
