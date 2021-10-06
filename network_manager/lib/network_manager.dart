@@ -16,7 +16,7 @@ class NetworkManager {
   NetworkManager._privateConstructor();
   static final NetworkManager instance = NetworkManager._privateConstructor();
 
-  Future<NetworkResult<P, E, String>> request<P extends BaseResponse, E extends BaseResponse>({
+  Future<NetworkResult<R, E, String>> request<R, P extends BaseResponse, E extends BaseResponse>({
     required HttpRequestProtocol req,
     required P parseModel,
     required E errorModel,
@@ -97,7 +97,7 @@ class NetworkManager {
     }
   }
 
-  NetworkResult<P, E, String> _response<P extends BaseResponse, E extends BaseResponse>(
+  NetworkResult<R, E, String> _response<R, P extends BaseResponse, E extends BaseResponse>(
     http.Response response,
     P parseModel,
     E errorModel,
@@ -106,7 +106,7 @@ class NetworkManager {
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
       if (response.body is List) {
-        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList() as P);
+        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList() as R);
       } else if (response.body is Map) {
         return NetworkResult.success(parseModel.fromJson(responseJson));
       } else {
