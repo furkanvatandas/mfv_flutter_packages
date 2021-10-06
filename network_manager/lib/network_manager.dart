@@ -80,6 +80,14 @@ class NetworkManager {
         'Request: ${req.runtimeType}()',
       );
       return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
+    } on HandshakeException catch (e) {
+      _log.shout(
+        'HandshakeException: ${e.message}\n'
+        'OSError: ${e.osError}\n'
+        'Type: ${e.type}\n'
+        'Request: ${req.runtimeType}()',
+      );
+      return const NetworkResult.exception('İşleminizi gerçekleştirirken bir hata oluştu.');
     } catch (e) {
       _log.shout(
         '$e\n'
