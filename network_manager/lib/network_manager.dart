@@ -102,7 +102,9 @@ class NetworkManager<Parser extends BaseResponse, Failure extends BaseResponse> 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       _log.fine('Response: $responseJson');
       if (responseJson is List) {
-        return NetworkResult.success(responseJson.map((e) => parseModel.fromJson(e)).toList().cast<Parser>() as Success);
+        return NetworkResult.success(
+          List<Parser>.from(responseJson.map((e) => parseModel.fromJson(e)).toList()) as Success,
+        );
       } else if (responseJson is Map<String, dynamic>) {
         return NetworkResult.success(parseModel.fromJson(responseJson) as Success);
       } else {
