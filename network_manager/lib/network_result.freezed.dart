@@ -152,14 +152,14 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Success<S, F, E> &&
-            (identical(other.success, success) ||
-                const DeepCollectionEquality().equals(other.success, success)));
+        (other.runtimeType == runtimeType &&
+            other is _Success<S, F, E> &&
+            const DeepCollectionEquality().equals(other.success, success));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(success);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(success));
 
   @JsonKey(ignore: true)
   @override
@@ -238,7 +238,7 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
 abstract class _Success<S, F, E> implements NetworkResult<S, F, E> {
   const factory _Success(S success) = _$_Success<S, F, E>;
 
-  S get success => throw _privateConstructorUsedError;
+  S get success;
   @JsonKey(ignore: true)
   _$SuccessCopyWith<S, F, E, _Success<S, F, E>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -292,14 +292,14 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Failure<S, F, E> &&
-            (identical(other.failure, failure) ||
-                const DeepCollectionEquality().equals(other.failure, failure)));
+        (other.runtimeType == runtimeType &&
+            other is _Failure<S, F, E> &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -378,7 +378,7 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
 abstract class _Failure<S, F, E> implements NetworkResult<S, F, E> {
   const factory _Failure(F failure) = _$_Failure<S, F, E>;
 
-  F get failure => throw _privateConstructorUsedError;
+  F get failure;
   @JsonKey(ignore: true)
   _$FailureCopyWith<S, F, E, _Failure<S, F, E>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -432,15 +432,14 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Exception<S, F, E> &&
+        (other.runtimeType == runtimeType &&
+            other is _Exception<S, F, E> &&
             (identical(other.exception, exception) ||
-                const DeepCollectionEquality()
-                    .equals(other.exception, exception)));
+                other.exception == exception));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(exception);
+  int get hashCode => Object.hash(runtimeType, exception);
 
   @JsonKey(ignore: true)
   @override
@@ -519,7 +518,7 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
 abstract class _Exception<S, F, E> implements NetworkResult<S, F, E> {
   const factory _Exception(String exception) = _$_Exception<S, F, E>;
 
-  String get exception => throw _privateConstructorUsedError;
+  String get exception;
   @JsonKey(ignore: true)
   _$ExceptionCopyWith<S, F, E, _Exception<S, F, E>> get copyWith =>
       throw _privateConstructorUsedError;

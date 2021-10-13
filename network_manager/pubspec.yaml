@@ -12,15 +12,15 @@ dependencies:
     sdk: flutter
   
   logging: ^1.0.2
-  http: ^0.13.3
-  freezed: ^0.14.5
+  http: ^0.13.4
+  freezed: ^0.15.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
-  freezed_annotation: ^0.14.3
-  build_runner: ^2.1.2
+  flutter_lints: ^1.0.4
+  freezed_annotation: ^0.15.0
+  build_runner: ^2.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
