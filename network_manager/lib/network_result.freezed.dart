@@ -17,20 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NetworkResultTearOff {
   const _$NetworkResultTearOff();
 
-  _Success<S, F, E> success<S, F, E>(S success) {
-    return _Success<S, F, E>(
+  NetworkResultSuccess<S, F, E> success<S, F, E>(S success) {
+    return NetworkResultSuccess<S, F, E>(
       success,
     );
   }
 
-  _Failure<S, F, E> failure<S, F, E>(F failure) {
-    return _Failure<S, F, E>(
+  NetworkResultFailure<S, F, E> failure<S, F, E>(F failure) {
+    return NetworkResultFailure<S, F, E>(
       failure,
     );
   }
 
-  _Exception<S, F, E> exception<S, F, E>(String exception) {
-    return _Exception<S, F, E>(
+  NetworkResultException<S, F, E> exception<S, F, E>(String exception) {
+    return NetworkResultException<S, F, E>(
       exception,
     );
   }
@@ -65,23 +65,23 @@ mixin _$NetworkResult<S, F, E> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Success<S, F, E> value) success,
-    required TResult Function(_Failure<S, F, E> value) failure,
-    required TResult Function(_Exception<S, F, E> value) exception,
+    required TResult Function(NetworkResultSuccess<S, F, E> value) success,
+    required TResult Function(NetworkResultFailure<S, F, E> value) failure,
+    required TResult Function(NetworkResultException<S, F, E> value) exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -105,29 +105,30 @@ class _$NetworkResultCopyWithImpl<S, F, E, $Res>
 }
 
 /// @nodoc
-abstract class _$SuccessCopyWith<S, F, E, $Res> {
-  factory _$SuccessCopyWith(
-          _Success<S, F, E> value, $Res Function(_Success<S, F, E>) then) =
-      __$SuccessCopyWithImpl<S, F, E, $Res>;
+abstract class $NetworkResultSuccessCopyWith<S, F, E, $Res> {
+  factory $NetworkResultSuccessCopyWith(NetworkResultSuccess<S, F, E> value,
+          $Res Function(NetworkResultSuccess<S, F, E>) then) =
+      _$NetworkResultSuccessCopyWithImpl<S, F, E, $Res>;
   $Res call({S success});
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<S, F, E, $Res>
+class _$NetworkResultSuccessCopyWithImpl<S, F, E, $Res>
     extends _$NetworkResultCopyWithImpl<S, F, E, $Res>
-    implements _$SuccessCopyWith<S, F, E, $Res> {
-  __$SuccessCopyWithImpl(
-      _Success<S, F, E> _value, $Res Function(_Success<S, F, E>) _then)
-      : super(_value, (v) => _then(v as _Success<S, F, E>));
+    implements $NetworkResultSuccessCopyWith<S, F, E, $Res> {
+  _$NetworkResultSuccessCopyWithImpl(NetworkResultSuccess<S, F, E> _value,
+      $Res Function(NetworkResultSuccess<S, F, E>) _then)
+      : super(_value, (v) => _then(v as NetworkResultSuccess<S, F, E>));
 
   @override
-  _Success<S, F, E> get _value => super._value as _Success<S, F, E>;
+  NetworkResultSuccess<S, F, E> get _value =>
+      super._value as NetworkResultSuccess<S, F, E>;
 
   @override
   $Res call({
     Object? success = freezed,
   }) {
-    return _then(_Success<S, F, E>(
+    return _then(NetworkResultSuccess<S, F, E>(
       success == freezed
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -138,8 +139,8 @@ class __$SuccessCopyWithImpl<S, F, E, $Res>
 
 /// @nodoc
 
-class _$_Success<S, F, E> implements _Success<S, F, E> {
-  const _$_Success(this.success);
+class _$NetworkResultSuccess<S, F, E> implements NetworkResultSuccess<S, F, E> {
+  const _$NetworkResultSuccess(this.success);
 
   @override
   final S success;
@@ -153,7 +154,7 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success<S, F, E> &&
+            other is NetworkResultSuccess<S, F, E> &&
             const DeepCollectionEquality().equals(other.success, success));
   }
 
@@ -163,8 +164,9 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
 
   @JsonKey(ignore: true)
   @override
-  _$SuccessCopyWith<S, F, E, _Success<S, F, E>> get copyWith =>
-      __$SuccessCopyWithImpl<S, F, E, _Success<S, F, E>>(this, _$identity);
+  $NetworkResultSuccessCopyWith<S, F, E, NetworkResultSuccess<S, F, E>>
+      get copyWith => _$NetworkResultSuccessCopyWithImpl<S, F, E,
+          NetworkResultSuccess<S, F, E>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -203,9 +205,9 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Success<S, F, E> value) success,
-    required TResult Function(_Failure<S, F, E> value) failure,
-    required TResult Function(_Exception<S, F, E> value) exception,
+    required TResult Function(NetworkResultSuccess<S, F, E> value) success,
+    required TResult Function(NetworkResultFailure<S, F, E> value) failure,
+    required TResult Function(NetworkResultException<S, F, E> value) exception,
   }) {
     return success(this);
   }
@@ -213,9 +215,9 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
   }) {
     return success?.call(this);
   }
@@ -223,9 +225,9 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -235,39 +237,41 @@ class _$_Success<S, F, E> implements _Success<S, F, E> {
   }
 }
 
-abstract class _Success<S, F, E> implements NetworkResult<S, F, E> {
-  const factory _Success(S success) = _$_Success<S, F, E>;
+abstract class NetworkResultSuccess<S, F, E> implements NetworkResult<S, F, E> {
+  const factory NetworkResultSuccess(S success) =
+      _$NetworkResultSuccess<S, F, E>;
 
   S get success;
   @JsonKey(ignore: true)
-  _$SuccessCopyWith<S, F, E, _Success<S, F, E>> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NetworkResultSuccessCopyWith<S, F, E, NetworkResultSuccess<S, F, E>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$FailureCopyWith<S, F, E, $Res> {
-  factory _$FailureCopyWith(
-          _Failure<S, F, E> value, $Res Function(_Failure<S, F, E>) then) =
-      __$FailureCopyWithImpl<S, F, E, $Res>;
+abstract class $NetworkResultFailureCopyWith<S, F, E, $Res> {
+  factory $NetworkResultFailureCopyWith(NetworkResultFailure<S, F, E> value,
+          $Res Function(NetworkResultFailure<S, F, E>) then) =
+      _$NetworkResultFailureCopyWithImpl<S, F, E, $Res>;
   $Res call({F failure});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<S, F, E, $Res>
+class _$NetworkResultFailureCopyWithImpl<S, F, E, $Res>
     extends _$NetworkResultCopyWithImpl<S, F, E, $Res>
-    implements _$FailureCopyWith<S, F, E, $Res> {
-  __$FailureCopyWithImpl(
-      _Failure<S, F, E> _value, $Res Function(_Failure<S, F, E>) _then)
-      : super(_value, (v) => _then(v as _Failure<S, F, E>));
+    implements $NetworkResultFailureCopyWith<S, F, E, $Res> {
+  _$NetworkResultFailureCopyWithImpl(NetworkResultFailure<S, F, E> _value,
+      $Res Function(NetworkResultFailure<S, F, E>) _then)
+      : super(_value, (v) => _then(v as NetworkResultFailure<S, F, E>));
 
   @override
-  _Failure<S, F, E> get _value => super._value as _Failure<S, F, E>;
+  NetworkResultFailure<S, F, E> get _value =>
+      super._value as NetworkResultFailure<S, F, E>;
 
   @override
   $Res call({
     Object? failure = freezed,
   }) {
-    return _then(_Failure<S, F, E>(
+    return _then(NetworkResultFailure<S, F, E>(
       failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -278,8 +282,8 @@ class __$FailureCopyWithImpl<S, F, E, $Res>
 
 /// @nodoc
 
-class _$_Failure<S, F, E> implements _Failure<S, F, E> {
-  const _$_Failure(this.failure);
+class _$NetworkResultFailure<S, F, E> implements NetworkResultFailure<S, F, E> {
+  const _$NetworkResultFailure(this.failure);
 
   @override
   final F failure;
@@ -293,7 +297,7 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure<S, F, E> &&
+            other is NetworkResultFailure<S, F, E> &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
@@ -303,8 +307,9 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
 
   @JsonKey(ignore: true)
   @override
-  _$FailureCopyWith<S, F, E, _Failure<S, F, E>> get copyWith =>
-      __$FailureCopyWithImpl<S, F, E, _Failure<S, F, E>>(this, _$identity);
+  $NetworkResultFailureCopyWith<S, F, E, NetworkResultFailure<S, F, E>>
+      get copyWith => _$NetworkResultFailureCopyWithImpl<S, F, E,
+          NetworkResultFailure<S, F, E>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -343,9 +348,9 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Success<S, F, E> value) success,
-    required TResult Function(_Failure<S, F, E> value) failure,
-    required TResult Function(_Exception<S, F, E> value) exception,
+    required TResult Function(NetworkResultSuccess<S, F, E> value) success,
+    required TResult Function(NetworkResultFailure<S, F, E> value) failure,
+    required TResult Function(NetworkResultException<S, F, E> value) exception,
   }) {
     return failure(this);
   }
@@ -353,9 +358,9 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
   }) {
     return failure?.call(this);
   }
@@ -363,9 +368,9 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -375,39 +380,41 @@ class _$_Failure<S, F, E> implements _Failure<S, F, E> {
   }
 }
 
-abstract class _Failure<S, F, E> implements NetworkResult<S, F, E> {
-  const factory _Failure(F failure) = _$_Failure<S, F, E>;
+abstract class NetworkResultFailure<S, F, E> implements NetworkResult<S, F, E> {
+  const factory NetworkResultFailure(F failure) =
+      _$NetworkResultFailure<S, F, E>;
 
   F get failure;
   @JsonKey(ignore: true)
-  _$FailureCopyWith<S, F, E, _Failure<S, F, E>> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NetworkResultFailureCopyWith<S, F, E, NetworkResultFailure<S, F, E>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ExceptionCopyWith<S, F, E, $Res> {
-  factory _$ExceptionCopyWith(
-          _Exception<S, F, E> value, $Res Function(_Exception<S, F, E>) then) =
-      __$ExceptionCopyWithImpl<S, F, E, $Res>;
+abstract class $NetworkResultExceptionCopyWith<S, F, E, $Res> {
+  factory $NetworkResultExceptionCopyWith(NetworkResultException<S, F, E> value,
+          $Res Function(NetworkResultException<S, F, E>) then) =
+      _$NetworkResultExceptionCopyWithImpl<S, F, E, $Res>;
   $Res call({String exception});
 }
 
 /// @nodoc
-class __$ExceptionCopyWithImpl<S, F, E, $Res>
+class _$NetworkResultExceptionCopyWithImpl<S, F, E, $Res>
     extends _$NetworkResultCopyWithImpl<S, F, E, $Res>
-    implements _$ExceptionCopyWith<S, F, E, $Res> {
-  __$ExceptionCopyWithImpl(
-      _Exception<S, F, E> _value, $Res Function(_Exception<S, F, E>) _then)
-      : super(_value, (v) => _then(v as _Exception<S, F, E>));
+    implements $NetworkResultExceptionCopyWith<S, F, E, $Res> {
+  _$NetworkResultExceptionCopyWithImpl(NetworkResultException<S, F, E> _value,
+      $Res Function(NetworkResultException<S, F, E>) _then)
+      : super(_value, (v) => _then(v as NetworkResultException<S, F, E>));
 
   @override
-  _Exception<S, F, E> get _value => super._value as _Exception<S, F, E>;
+  NetworkResultException<S, F, E> get _value =>
+      super._value as NetworkResultException<S, F, E>;
 
   @override
   $Res call({
     Object? exception = freezed,
   }) {
-    return _then(_Exception<S, F, E>(
+    return _then(NetworkResultException<S, F, E>(
       exception == freezed
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
@@ -418,8 +425,9 @@ class __$ExceptionCopyWithImpl<S, F, E, $Res>
 
 /// @nodoc
 
-class _$_Exception<S, F, E> implements _Exception<S, F, E> {
-  const _$_Exception(this.exception);
+class _$NetworkResultException<S, F, E>
+    implements NetworkResultException<S, F, E> {
+  const _$NetworkResultException(this.exception);
 
   @override
   final String exception;
@@ -433,7 +441,7 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Exception<S, F, E> &&
+            other is NetworkResultException<S, F, E> &&
             (identical(other.exception, exception) ||
                 other.exception == exception));
   }
@@ -443,8 +451,9 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
 
   @JsonKey(ignore: true)
   @override
-  _$ExceptionCopyWith<S, F, E, _Exception<S, F, E>> get copyWith =>
-      __$ExceptionCopyWithImpl<S, F, E, _Exception<S, F, E>>(this, _$identity);
+  $NetworkResultExceptionCopyWith<S, F, E, NetworkResultException<S, F, E>>
+      get copyWith => _$NetworkResultExceptionCopyWithImpl<S, F, E,
+          NetworkResultException<S, F, E>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -483,9 +492,9 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Success<S, F, E> value) success,
-    required TResult Function(_Failure<S, F, E> value) failure,
-    required TResult Function(_Exception<S, F, E> value) exception,
+    required TResult Function(NetworkResultSuccess<S, F, E> value) success,
+    required TResult Function(NetworkResultFailure<S, F, E> value) failure,
+    required TResult Function(NetworkResultException<S, F, E> value) exception,
   }) {
     return exception(this);
   }
@@ -493,9 +502,9 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
   }) {
     return exception?.call(this);
   }
@@ -503,9 +512,9 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Success<S, F, E> value)? success,
-    TResult Function(_Failure<S, F, E> value)? failure,
-    TResult Function(_Exception<S, F, E> value)? exception,
+    TResult Function(NetworkResultSuccess<S, F, E> value)? success,
+    TResult Function(NetworkResultFailure<S, F, E> value)? failure,
+    TResult Function(NetworkResultException<S, F, E> value)? exception,
     required TResult orElse(),
   }) {
     if (exception != null) {
@@ -515,11 +524,13 @@ class _$_Exception<S, F, E> implements _Exception<S, F, E> {
   }
 }
 
-abstract class _Exception<S, F, E> implements NetworkResult<S, F, E> {
-  const factory _Exception(String exception) = _$_Exception<S, F, E>;
+abstract class NetworkResultException<S, F, E>
+    implements NetworkResult<S, F, E> {
+  const factory NetworkResultException(String exception) =
+      _$NetworkResultException<S, F, E>;
 
   String get exception;
   @JsonKey(ignore: true)
-  _$ExceptionCopyWith<S, F, E, _Exception<S, F, E>> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NetworkResultExceptionCopyWith<S, F, E, NetworkResultException<S, F, E>>
+      get copyWith => throw _privateConstructorUsedError;
 }
