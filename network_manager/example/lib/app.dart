@@ -40,9 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 var networkResult = await NetworkManager(
                   DisneyCharacterRequest(),
                   parseModel: DisneyCharacterResponse(),
-                  successModel: DisneyCharacterResponse(),
                   failureModel: DisneyErrorResponse(),
-                ).request();
+                ).request<DisneyCharacterResponse>();
 
                 networkResult.when(
                   success: (success) {
