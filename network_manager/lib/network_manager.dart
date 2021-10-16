@@ -10,10 +10,9 @@ import 'package:network_manager/http_request_protocol.dart';
 import 'package:network_manager/models/base_response.dart';
 import 'package:network_manager/network_result.dart';
 
-class NetworkManager<S, P extends INetworkResponse, F extends INetworkResponse> {
+class NetworkManager<P extends INetworkResponse, F extends INetworkResponse> {
   final Logger _log = Logger('NetworkManager');
 
-  final S successModel;
   final P parseModel;
   final F failureModel;
 
@@ -22,13 +21,12 @@ class NetworkManager<S, P extends INetworkResponse, F extends INetworkResponse> 
 
   NetworkManager(
     this.httpReq, {
-    required this.successModel,
     required this.parseModel,
     required this.failureModel,
     this.showResponseDetail = false,
   });
 
-  Future<NetworkResult<S, F, String>> request() async {
+  Future<NetworkResult<S, F, String>> request<S>() async {
     var _header = httpReq.headers?..removeWhere((key, value) => value.isEmpty);
     var _body = httpReq.bodyParameters?..removeWhere((key, value) => value.isEmpty);
     var _query = httpReq.queryParameters?..removeWhere((key, value) => value.isEmpty);
@@ -54,7 +52,7 @@ class NetworkManager<S, P extends INetworkResponse, F extends INetworkResponse> 
     }
   }
 
-  NetworkResult<S, F, String> response(http.Response response) {
+  NetworkResult<S, F, String> response<S>(http.Response response) {
     var responseJson = json.decode(response.body);
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       showResponseDetail ? _log.fine('Response: $responseJson') : _log.fine('${response.request}');
