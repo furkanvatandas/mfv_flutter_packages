@@ -15,7 +15,4 @@ abstract class DisneyBaseRequest extends HttpRequestProtocol {
 
   @override
   Map<String, String>? get queryParameters => null;
-
-  @override
-  Future<void> beforeRequest() async {}
 }

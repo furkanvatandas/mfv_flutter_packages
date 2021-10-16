@@ -1,5 +1,3 @@
-import 'dart:async';
-
 enum HttpMethods { get, post, put, delete }
 
 abstract class HttpRequestProtocol {
@@ -13,6 +11,4 @@ abstract class HttpRequestProtocol {
   Map<String, String>? get headers;
   Map<String, String>? get bodyParameters;
   Map<String, String>? get queryParameters;
-
-  Future<void> beforeRequest();
 }

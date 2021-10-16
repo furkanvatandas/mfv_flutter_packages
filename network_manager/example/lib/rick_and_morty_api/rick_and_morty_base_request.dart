@@ -15,9 +15,4 @@ abstract class RickAndMortyBaseRequest extends HttpRequestProtocol {
 
   @override
   Map<String, String>? get queryParameters => null;
-
-  @override
-  Future<void> beforeRequest() {
-    throw UnimplementedError();
-  }
 }
