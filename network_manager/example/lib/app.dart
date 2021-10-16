@@ -1,12 +1,8 @@
 import 'package:example/disney_api/requests/disney_character_request.dart';
 import 'package:example/disney_api/responses/disney_character_response.dart';
 import 'package:example/disney_api/responses/disney_error_response.dart';
-import 'package:example/rick_and_morty_api/requests/character_request.dart';
-import 'package:example/rick_and_morty_api/responses/character_response.dart';
-import 'package:example/rick_and_morty_api/responses/rick_and_morty_error_response.dart';
 import 'package:flutter/material.dart';
 import 'package:network_manager/network_manager.dart';
-import 'package:network_manager/network_result.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -41,20 +37,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                NetworkManager<DisneyErrorResponse> disneyNetworkManager = NetworkManager<DisneyErrorResponse>(
+                var networkResult = await NetworkManager(
+                  DisneyCharacterRequest(),
+                  parseModel: DisneyCharacterResponse(),
+                  successModel: DisneyCharacterResponse(),
                   failureModel: DisneyErrorResponse(),
-                  previousProtocols: [
-                    PreviousProtocolModel(
-                      httpRequestProtocol: DisneyCharacterRequest(),
-                      parseModel: DisneyCharacterResponse(),
-                    ),
-                  ],
-                );
-
-                var networkResult = await disneyNetworkManager.run<CharacterResponse, CharacterResponse>(
-                  protocol: CharacterRequest(),
-                  parseModel: CharacterResponse(),
-                );
+                ).request();
 
                 networkResult.when(
                   success: (success) {

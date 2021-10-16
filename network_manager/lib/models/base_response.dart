@@ -1,3 +1,3 @@
-abstract class INetworkResponse<T> {
-  T fromJson(Map<String, dynamic> map);
+abstract class INetworkResponse {
+  fromJson(Map<String, dynamic> map);
 }
