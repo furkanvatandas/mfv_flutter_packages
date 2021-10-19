@@ -1,5 +1,5 @@
-import 'package:example/disney_api/disney_base_request.dart';
-import 'package:network_manager/http_request_protocol.dart';
+import 'package:example/disney_service/base/disney_base_request.dart';
+import 'package:network_manager/network_request.dart';
 
 class DisneyCharacterRequest extends DisneyBaseRequest {
   @override

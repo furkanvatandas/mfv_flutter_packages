@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:network_manager/models/base_response.dart';
+import 'package:network_manager/models/network_model.dart';
 
 part 'disney_error_response.g.dart';
 
 @JsonSerializable()
-class DisneyErrorResponse extends INetworkResponse {
+class DisneyErrorResponse extends INetworkModel {
   final String? error;
 
   DisneyErrorResponse({this.error});

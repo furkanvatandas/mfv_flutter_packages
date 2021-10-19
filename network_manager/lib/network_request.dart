@@ -1,6 +1,6 @@
 enum HttpMethods { get, post, put, delete }
 
-abstract class HttpRequestProtocol {
+abstract class INetworkRequest {
   bool get isHttps;
 
   String get path;

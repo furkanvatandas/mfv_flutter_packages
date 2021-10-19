@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'http_request_protocol.dart';
+import 'network_request.dart';
 
 extension HttpMethodsExtension on HttpMethods {
   String get methodName {

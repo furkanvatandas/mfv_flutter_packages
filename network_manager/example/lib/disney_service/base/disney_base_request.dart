@@ -1,6 +1,6 @@
-import 'package:network_manager/http_request_protocol.dart';
+import 'package:network_manager/network_request.dart';
 
-abstract class DisneyBaseRequest extends HttpRequestProtocol {
+abstract class DisneyBaseRequest extends INetworkRequest {
   @override
   String get baseUrl => 'api.disneyapi.dev';
 

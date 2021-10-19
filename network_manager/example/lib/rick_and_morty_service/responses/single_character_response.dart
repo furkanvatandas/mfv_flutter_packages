@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:network_manager/models/base_response.dart';
+import 'package:network_manager/models/network_model.dart';
 
 part 'single_character_response.g.dart';
 
 @JsonSerializable()
-class SingleCharacterResponse extends INetworkResponse {
+class SingleCharacterResponse extends INetworkModel {
   final int? id;
   final String? name;
   final String? status;

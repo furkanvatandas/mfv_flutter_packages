@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:network_manager/models/base_response.dart';
+import 'package:network_manager/models/network_model.dart';
 
 part 'disney_character_response.g.dart';
 
 @JsonSerializable()
-class DisneyCharacterResponse extends INetworkResponse {
+class DisneyCharacterResponse extends INetworkModel {
   final List<Character?>? data;
   final int? count;
   final int? totalPages;

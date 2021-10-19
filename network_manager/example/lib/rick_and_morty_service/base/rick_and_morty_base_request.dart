@@ -1,6 +1,6 @@
-import 'package:network_manager/http_request_protocol.dart';
+import 'package:network_manager/network_request.dart';
 
-abstract class RickAndMortyBaseRequest extends HttpRequestProtocol {
+abstract class RickAndMortyBaseRequest extends INetworkRequest {
   @override
   String get baseUrl => 'rickandmortyapi.com';
 

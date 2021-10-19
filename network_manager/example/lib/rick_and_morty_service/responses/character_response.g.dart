@@ -37,22 +37,24 @@ Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{
       'prev': instance.prev,
     };
 
-Origin _$OriginFromJson(Map<String, dynamic> json) => Origin(
+OriginItem _$OriginItemFromJson(Map<String, dynamic> json) => OriginItem(
       name: json['name'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$OriginToJson(Origin instance) => <String, dynamic>{
+Map<String, dynamic> _$OriginItemToJson(OriginItem instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'url': instance.url,
     };
 
-Location _$LocationFromJson(Map<String, dynamic> json) => Location(
+LocationItem _$LocationItemFromJson(Map<String, dynamic> json) => LocationItem(
       name: json['name'] as String?,
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
+Map<String, dynamic> _$LocationItemToJson(LocationItem instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'url': instance.url,
     };
@@ -66,10 +68,10 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       gender: json['gender'] as String?,
       origin: json['origin'] == null
           ? null
-          : Origin.fromJson(json['origin'] as Map<String, dynamic>),
+          : OriginItem.fromJson(json['origin'] as Map<String, dynamic>),
       location: json['location'] == null
           ? null
-          : Location.fromJson(json['location'] as Map<String, dynamic>),
+          : LocationItem.fromJson(json['location'] as Map<String, dynamic>),
       image: json['image'] as String?,
       episode: (json['episode'] as List<dynamic>?)
           ?.map((e) => e as String?)

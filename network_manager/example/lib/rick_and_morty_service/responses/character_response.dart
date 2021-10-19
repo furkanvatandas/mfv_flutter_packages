@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:network_manager/models/base_response.dart';
+import 'package:network_manager/models/network_model.dart';
 
 part 'character_response.g.dart';
 
 @JsonSerializable()
-class CharacterResponse extends INetworkResponse {
+class CharacterResponse extends INetworkModel {
   final Info? info;
   final List<Result?>? results;
 
@@ -33,23 +33,23 @@ class Info {
 }
 
 @JsonSerializable()
-class Origin {
+class OriginItem {
   final String? name;
   final String? url;
 
-  Origin({this.name, this.url});
-  factory Origin.fromJson(Map<String, dynamic> json) => _$OriginFromJson(json);
-  Map<String, dynamic> toJson() => _$OriginToJson(this);
+  OriginItem({this.name, this.url});
+  factory OriginItem.fromJson(Map<String, dynamic> json) => _$OriginItemFromJson(json);
+  Map<String, dynamic> toJson() => _$OriginItemToJson(this);
 }
 
 @JsonSerializable()
-class Location {
+class LocationItem {
   final String? name;
   final String? url;
 
-  Location({this.name, this.url});
-  factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationToJson(this);
+  LocationItem({this.name, this.url});
+  factory LocationItem.fromJson(Map<String, dynamic> json) => _$LocationItemFromJson(json);
+  Map<String, dynamic> toJson() => _$LocationItemToJson(this);
 }
 
 @JsonSerializable()
@@ -60,8 +60,8 @@ class Result {
   final String? species;
   final String? type;
   final String? gender;
-  final Origin? origin;
-  final Location? location;
+  final OriginItem? origin;
+  final LocationItem? location;
   final String? image;
   final List<String?>? episode;
   final String? url;

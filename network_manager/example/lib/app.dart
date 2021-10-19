@@ -1,6 +1,4 @@
-import 'package:example/disney_api/requests/disney_character_request.dart';
-import 'package:example/disney_api/responses/disney_character_response.dart';
-import 'package:example/disney_api/responses/disney_error_response.dart';
+import 'package:example/disney_service/disney_service.dart';
 import 'package:flutter/material.dart';
 import 'package:network_manager/network_manager.dart';
 
@@ -37,11 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                var networkResult = await NetworkManager(
-                  DisneyCharacterRequest(),
+                var networkManager = NetworkManager(failureModel: DisneyErrorResponse());
+                var networkResult = await networkManager.request<DisneyCharacterResponse, DisneyCharacterResponse>(
+                  req: DisneyCharacterRequest(),
                   parseModel: DisneyCharacterResponse(),
-                  failureModel: DisneyErrorResponse(),
-                ).request<DisneyCharacterResponse>();
+                );
 
                 networkResult.when(
                   success: (success) {
